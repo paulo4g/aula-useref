@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
 
-function App() {
+const App = () => {
+  const [ carrinho, setCarrinho ] = React.useState(0)
+  const [ notificacao, setNotificacao ] = React.useState(null)
+  const timeOutRef = React.useRef()
+
+  function handleClick() {
+    setCarrinho(carrinho + 1)
+    setNotificacao('Item adicionado ao carrinho')
+
+    timeOutRef.current = setTimeout(() => {
+      setNotificacao(null)
+    }, 2000);
+    console.log(timeOutRef);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <p>{notificacao}</p>
+      <button onClick={handleClick}>Adicionar Carrinho { carrinho}</button>
     </div>
   );
-}
+};
 
 export default App;
